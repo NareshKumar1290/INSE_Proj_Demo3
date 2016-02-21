@@ -8,8 +8,8 @@ public class LoginDao {
 			Connection con=ConnectionProvider.getCon();
 			
 			// TODO: instead of select *, use id to check, if Id > 0 then email and password is correct otherwise not found and email address not valid
-			PreparedStatement ps=con.prepareStatement("select * from login_info where email=? and password=? ;");
-			ps.setString(1,bean.getEmail());
+			PreparedStatement ps=con.prepareStatement("select * from login_details where emailAddress=? and password=? ;");
+			ps.setString(1,bean.getEmailAddress());
 			ps.setString(2, bean.getPassword());
 			
 			ResultSet rs=ps.executeQuery();

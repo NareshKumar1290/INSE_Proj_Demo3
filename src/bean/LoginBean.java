@@ -1,14 +1,14 @@
 package bean;
 
 public class LoginBean {
-private String email, password;
+private String emailAddress, password;
 
-public String getEmail() {
-	return email;
+public String getEmailAddress() {
+	return emailAddress;
 }
 
-public void setEmail(String email) {
-	this.email = email;
+public void setEmailAddress(String emailAddress) {
+	this.emailAddress = emailAddress;
 }
 
 public String getPassword() {
