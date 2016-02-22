@@ -5,7 +5,50 @@ public class RegisterBean {
 	private int Id;
 	private String firstName, middleName, lastName, emailAddress, password, phoneNumber;
 	private String addressLine1, addressLine2, city, province, postalCode, country;
+	private String optionValue, cName, cAddress, creditCardHoldername, creditCardNumber, creditCardExpiry, creditCardSecurityCode;
 	
+	public String getOptionValue() {
+		return optionValue;
+	}
+	public void setOptionValue(String optionValue) {
+		this.optionValue = optionValue;
+	}
+	public String getcName() {
+		return cName;
+	}
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
+	public String getcAddress() {
+		return cAddress;
+	}
+	public void setcAddress(String cAddress) {
+		this.cAddress = cAddress;
+	}
+	public String getCreditCardHoldername() {
+		return creditCardHoldername;
+	}
+	public void setCreditCardHoldername(String creditCardHoldername) {
+		this.creditCardHoldername = creditCardHoldername;
+	}
+	public String getCreditCardNumber() {
+		return creditCardNumber;
+	}
+	public void setCreditCardNumber(String creditCardNumber) {
+		this.creditCardNumber = creditCardNumber;
+	}
+	public String getCreditCardExpiry() {
+		return creditCardExpiry;
+	}
+	public void setCreditCardExpiry(String creditCardExpiry) {
+		this.creditCardExpiry = creditCardExpiry;
+	}
+	public String getCreditCardSecurityCode() {
+		return creditCardSecurityCode;
+	}
+	public void setCreditCardSecurityCode(String creditCardSecurityCode) {
+		this.creditCardSecurityCode = creditCardSecurityCode;
+	}
 	public int getId() {
 		return Id;
 	}
