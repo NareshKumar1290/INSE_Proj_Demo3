@@ -1,4 +1,4 @@
-<form action="TaskDetailConfirmation">
+<form action="TaskDetailConfirmation.jsp">
 	<h1>Welcome to the Task Page. Kindly submit your task here. Thanks
 		!!!!</h1>
 	Task Name : <input type="text" name="taskName" /><br />
@@ -8,5 +8,6 @@
 		name="numberOfWorkerRequired" /><br />
 	<br /> Budget Per Worker : <input type="text" name="budgetPerWorker" /><br />
 	<br /> Task Status : <input type="text" name="taskStatusString" /><br />
-	<br /> <input type="submit" value="Register" />
+	<input type="text" hidden="hidden" name="clientId" value="<%=request.getParameter("loginId") %>" /><br />
+	<br /> <input type="submit" value="Add Task" />
 </form>

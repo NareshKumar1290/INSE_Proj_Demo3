@@ -2,20 +2,46 @@ package bean;
 import java.sql.*;
 
 public class LoginDao {
-	public static boolean validate(LoginBean bean){
-		boolean status=false;
+	static Connection con = null;
+	public static Integer validate(LoginBean bean){
+		
+		Integer loginIdInt = 0;
 		try{
-			Connection con=ConnectionProvider.getCon();
-			
-			// TODO: instead of select *, use id to check, if Id > 0 then email and password is correct otherwise not found and email address not valid
+			if(con == null){
+				con=ConnectionProvider.getCon();
+			}
 			PreparedStatement ps=con.prepareStatement("select * from login_details where emailAddress=? and password=? ;");
 			ps.setString(1,bean.getEmailAddress());
 			ps.setString(2, bean.getPassword());
 			
 			ResultSet rs=ps.executeQuery();
-			status=rs.next();
-			//TODO : also use the type field to determine whether the login person is a client or a worker
+			if(rs.next()){
+				Object loginIdObj = rs.getObject("Id");
+				if(loginIdObj != null){
+					loginIdInt = Integer.parseInt(loginIdObj.toString());
+				}
+			}
 		}catch(Exception e){}
-		return status;
+		return loginIdInt;
 	}
+	
+	public static Integer getCheckType(Integer loginId){
+		Integer loginIdType = 0;
+		try{
+			if(con == null){
+				con=ConnectionProvider.getCon();
+			}
+			PreparedStatement ps=con.prepareStatement("select * from login_details where Id = "+loginId);
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				Object loginIdTypeObj = rs.getObject("type");
+				if(loginIdTypeObj != null){
+					loginIdType = Integer.parseInt(loginIdTypeObj.toString());
+				}
+			}
+		}catch(Exception e){}
+		return loginIdType;
+	}
+			
 }

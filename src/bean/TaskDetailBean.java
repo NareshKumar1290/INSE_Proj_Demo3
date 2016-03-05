@@ -2,7 +2,7 @@ package bean;
 
 public class TaskDetailBean {
 	
-	private int taskId, numberOfWorkerRequired, budgetPerWorker, taskStatusInt;
+	private int taskId, numberOfWorkerRequired, budgetPerWorker, taskStatusInt, clientId;
 	private String taskName, domain, taskDescription, taskStatusString;
 	public int getTaskId() {
 		return taskId;
@@ -12,6 +12,12 @@ public class TaskDetailBean {
 	}
 	public void setNumberOfWorkerRequired(int numberOfWorkerRequired) {
 		this.numberOfWorkerRequired = numberOfWorkerRequired;
+	}
+	public int getClientId() {
+		return clientId;
+	}
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 	public int getBudgetPerWorker() {
 		return budgetPerWorker;

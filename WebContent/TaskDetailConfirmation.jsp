@@ -14,6 +14,6 @@ session.setAttribute("session","TRUE");
 else
 {
 out.print("Sorry, There are some issues in the information provided. Please check again and submit. Thanks !!!!");
-
 }
 %>
+<jsp:include page="TaskDetail.jsp"></jsp:include>
