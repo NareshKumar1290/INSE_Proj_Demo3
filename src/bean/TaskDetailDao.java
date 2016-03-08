@@ -22,12 +22,14 @@ public class TaskDetailDao {
 			ps.setString(3, bean.getTaskDescription());
 			ps.setInt(4, bean.getNumberOfWorkerRequired());
 			ps.setInt(5, bean.getBudgetPerWorker());
-			ps.setString(7, bean.getTaskStatusString());
-			ps.setInt(8, bean.getClientId());
-		
+			
 			Calendar cal = Calendar.getInstance();
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			ps.setString(6, dateFormat.format(cal.getTime()));
+			
+			ps.setString(7, bean.getTaskStatusString());
+			ps.setInt(8, bean.getClientId());
+		
 			
 			int one = ps.executeUpdate();
 			status = one == 1 ? true : false;
