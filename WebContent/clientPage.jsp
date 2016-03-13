@@ -3,13 +3,12 @@
 	<h1>Welcome to Client Page !!!!!</h1>
 	
 	<Input type="button" name = "Add Tasks" value="Add Tasks" onClick="openPage('TaskDetail.jsp');">
-	<Input type="button" name = "View Tasks" value="View Tasks" onClick="openPage('ViewTaskDetail.jsp');">
+	<Input type="button" name = "View Tasks" value="View Tasks" onClick="openPage('viewTaskDetail.jsp');">
 </form>
 
 
-<SCRIPT LANGUAGE="JavaScript">
-	var iAmClicked = false;
-    
+<script language="JavaScript">
+	
     function openPage(pageURL)
     {
     	var loginId = <%=request.getParameter("loginId")%>;
@@ -17,4 +16,4 @@
    		
     	window.location.href = pageURL+"?loginId="+loginId+"&loginIdType="+loginIdType;
     }
-</SCRIPT>
+</script>

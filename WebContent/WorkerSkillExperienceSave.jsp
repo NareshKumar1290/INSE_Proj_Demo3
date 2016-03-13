@@ -5,7 +5,7 @@
 <jsp:setProperty property="*" name="obj"/>
 
 <%
-boolean status = false;//TaskDetailDao.validate(obj);
+boolean status = WorkerSkillExperienceDao.validate(obj);
 	
 if(status){
 out.println("Information has successfully saved into the database.");
