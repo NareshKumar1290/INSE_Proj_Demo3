@@ -18,6 +18,8 @@ public class WorkerSkillExperienceDao {
 		return status;
 	}
 	
+	//TODO : Update the table of worker - column=availability to Int or String or Varchar
+	//TODO : Skill Set1 has been done, need to do it for all.
 	public static boolean saveSkillSet1(WorkerSkillExperienceBean bean) throws SQLException{
 		boolean status = false;
 		if(con == null){
@@ -25,13 +27,17 @@ public class WorkerSkillExperienceDao {
 		}
 		
 		PreparedStatement ps=con.prepareStatement("insert into worker"
-				+ "(domainOfWork, specificTask, yearsOfExperience, chargedFee) "
-				+ "values (?, ?, ?, ?);");
+				+ "(domainOfWork, specificTask, yearsOfExperience, chargedFee, availability, credibility, Login_Details_Id) "
+				+ "values (?, ?, ?, ?, ?, ?, ?);");
 		
 		ps.setString(1, bean.getDomainOfWork1());
 		ps.setString(2, bean.getSpecificTask1());
 		ps.setString(3, bean.getYearsOfExperience1());
 		ps.setString(4, bean.getChargedFee1());
+		ps.setString(5, bean.getAvailable());
+		ps.setString(6, "0.5");
+		ps.setInt(7, bean.getLoginId());
+		
 		
 		int one = ps.executeUpdate();
 		status = one == 1 ? true : false;

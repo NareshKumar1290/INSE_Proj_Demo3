@@ -16,6 +16,9 @@ public class TaskDetailBean {
 	public int getClientId() {
 		return clientId;
 	}
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
+	}
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}

@@ -46,9 +46,8 @@ public class TaskDetailDao {
 		
 		ArrayList<TaskDetailBean> taskDetailBeanArray = new ArrayList<TaskDetailBean>();
 		String taskName="", domain="", taskDescription="", taskStatusString="" ;
-		int numberOfWorkerRequired=0, budgetPerWorker=0;
+		int numberOfWorkerRequired=0, budgetPerWorker=0, taskId  = 0;
 		Integer loginIdInt = Integer.parseInt(loginId);
-		
 		
 		try{
 			if(con == null){
@@ -96,11 +95,16 @@ public class TaskDetailDao {
 				}
 				taskDetailBeanObj.setTaskStatusString(taskStatusString);
 				
+				Object taskIdObj = rs.getObject("taskDetailId");
+				if(taskIdObj != null){
+					taskId = Integer.parseInt(taskIdObj.toString());
+				}
+				taskDetailBeanObj.setTaskId(taskId);
+				
 				taskDetailBeanObj.setClientId(loginIdInt);
 				
 				taskDetailBeanArray.add(taskDetailBeanObj);
 			}
-			
 			
 		}catch(Exception e){}
 		return taskDetailBeanArray;

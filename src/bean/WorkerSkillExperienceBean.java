@@ -11,6 +11,21 @@ public class WorkerSkillExperienceBean {
 	private String domainOfWork3, specificTask3, yearsOfExperience3, chargedFee3;
 	private String domainOfWork4, specificTask4, yearsOfExperience4, chargedFee4;
 	private String domainOfWork5, specificTask5, yearsOfExperience5, chargedFee5;
+	private String available;
+	private Integer loginId;
+	
+	public String getAvailable() {
+		return available;
+	}
+	public void setAvailable(String available) {
+		this.available = available;
+	}
+	public Integer getLoginId() {
+		return loginId;
+	}
+	public void setLoginId(Integer loginId) {
+		this.loginId = loginId;
+	}
 	public String getDomainOfWork1() {
 		return domainOfWork1;
 	}

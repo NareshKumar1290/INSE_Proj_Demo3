@@ -4,51 +4,60 @@
 	Please list down your skill and experience - MAX 5
 <br/><br/> 
 
-Domain <Input type="input" id ="domain1" name = "domain1" >
+Domain <Input type="input" id ="domainOfWork1" name = "domainOfWork1" >
 <br/><br/>
-Skill <Input type="input" id ="skill1" name = "skill1">
+Skill <Input type="input" id ="specificTask1" name = "specificTask1">
 <br/><br/>
-Years of Experience <Input type="input" id ="experience1" name = "experience1">
+Years of Experience <Input type="input" id ="yearsOfExperience1" name = "yearsOfExperience1">
 <br/><br/>
-Charged Fee <Input type="input" id ="chargedFee1" name = "chargedFee2">
+Charged Fee <Input type="input" id ="chargedFee1" name = "chargedFee1">
 <br/><br/><br/><br/>
 
-Domain <Input type="input" id ="domain2" name = "domain2" >
+Domain <Input type="input" id ="domainOfWork2" name = "domainOfWork2" >
 <br/><br/>
-Skill <Input type="input" id ="skill2" name = "skill2">
+Skill <Input type="input" id ="specificTask2" name = "specificTask2">
 <br/><br/>
-Years of Experience <Input type="input" id ="experience2" name = "experience2">
+Years of Experience <Input type="input" id ="yearsOfExperience2" name = "yearsOfExperience2">
 <br/><br/>
 Charged Fee <Input type="input" id ="chargedFee2" name = "chargedFee2">
 <br/><br/><br/><br/>
 
-Domain <Input type="input" id ="domain3" name = "domain3" >
+Domain <Input type="input" id ="domainOfWork3" name = "domainOfWork3" >
 <br/><br/>
-Skill <Input type="input" id ="skill3" name = "skill3">
+Skill <Input type="input" id ="specificTask3" name = "specificTask3">
 <br/><br/>
-Years of Experience <Input type="input" id ="experience3" name = "experience3">
+Years of Experience <Input type="input" id ="yearsOfExperience3" name = "yearsOfExperience3">
 <br/><br/>
 Charged Fee <Input type="input" id ="chargedFee3" name = "chargedFee3">
 <br/><br/><br/><br/>
 
-Domain <Input type="input" id ="domain4" name = "domain4" >
+Domain <Input type="input" id ="domainOfWork4" name = "domainOfWork4" >
 <br/><br/>
-Skill <Input type="input" id ="skill4" name = "skill4">
+Skill <Input type="input" id ="specificTask4" name = "specificTask4">
 <br/><br/>
-Years of Experience <Input type="input" id ="experience4" name = "experience4">
+Years of Experience <Input type="input" id ="yearsOfExperience4" name = "yearsOfExperience4">
 <br/><br/>
 Charged Fee <Input type="input" id ="chargedFee4" name = "chargedFee4">
 <br/><br/><br/><br/>
 
-Domain <Input type="input" id ="domain5" name = "domain5" >
+Domain <Input type="input" id ="domainOfWork5" name = "domainOfWork5" >
 <br/><br/>
-Skill <Input type="input" id ="skill5" name = "skill5">
+Skill <Input type="input" id ="specificTask5" name = "specificTask5">
 <br/><br/>
-Years of Experience <Input type="input" id ="experience5" name = "experience5">
+Years of Experience <Input type="input" id ="yearsOfExperience5" name = "yearsOfExperience5">
 <br/><br/>
 Charged Fee <Input type="input" id ="chargedFee5" name = "chargedFee5">
 <br/><br/><br/><br/>
 
-<Input type="button" name = "Save" value="Save">
+Available <select id=available name="available">
+  <option id="availableYes" name="availableYes" value="availableYes">Yes</option>
+  <option id="availableNo" name="availableNo" value="availableNo">No</option>
+</select>
+
+<Input type="input" hidden="hidden" id ="loginId" name = "loginId" value="<%=request.getParameter("loginId")%>">
+
+<br/><br/><br/><br/>
+
+<Input type="submit" name ="Save" value="Save">
 
 </form>

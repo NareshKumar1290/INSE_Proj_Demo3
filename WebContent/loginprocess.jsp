@@ -16,7 +16,7 @@ session.setAttribute("loginIdType", loginIdType);
 	if(loginIdType == 1){
 		url += "clientPage.jsp"+"?loginId="+loginId+"&loginIdType="+loginIdType;
 	}else{ //change back to workerPage.jsp when you are done with the Task Page
-		url += "clientPage.jsp"+"?loginId="+loginId+"&loginIdType="+loginIdType;
+		url += "workerPage.jsp"+"?loginId="+loginId+"&loginIdType="+loginIdType;
 	}
 response.sendRedirect(response.encodeRedirectURL(url));
 }
