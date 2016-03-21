@@ -43,10 +43,14 @@ public class TaskDetailDao {
 	}
 	
 	public static ArrayList<TaskDetailBean> fetchClientTaskRecords(String loginId){
+		return fetchClientTaskRecords(loginId, null);
+	}
+	
+	public static ArrayList<TaskDetailBean> fetchClientTaskRecords(String loginId, String taskIdStr){
 		
 		ArrayList<TaskDetailBean> taskDetailBeanArray = new ArrayList<TaskDetailBean>();
 		String taskName="", domain="", taskDescription="", taskStatusString="" ;
-		int numberOfWorkerRequired=0, budgetPerWorker=0, taskId  = 0;
+		int numberOfWorkerRequired=0, budgetPerWorker=0, taskId = 0;
 		Integer loginIdInt = Integer.parseInt(loginId);
 		
 		try{
@@ -54,7 +58,12 @@ public class TaskDetailDao {
 				con=ConnectionProvider.getCon();
 			}
 			
-			PreparedStatement ps=con.prepareStatement("select * from task_details where clientId = " + loginIdInt);
+			String queryToExecute = "select * from task_details where clientId = " + loginIdInt;
+			if(taskIdStr != null && taskIdStr.length() > 0 && Integer.parseInt(taskIdStr) > 0){
+				queryToExecute += " where taskDetailId = "+taskIdStr; 
+			}
+			
+			PreparedStatement ps=con.prepareStatement(queryToExecute);
 			
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
@@ -95,10 +104,12 @@ public class TaskDetailDao {
 				}
 				taskDetailBeanObj.setTaskStatusString(taskStatusString);
 				
+				
 				Object taskIdObj = rs.getObject("taskDetailId");
 				if(taskIdObj != null){
 					taskId = Integer.parseInt(taskIdObj.toString());
 				}
+				
 				taskDetailBeanObj.setTaskId(taskId);
 				
 				taskDetailBeanObj.setClientId(loginIdInt);
@@ -108,6 +119,30 @@ public class TaskDetailDao {
 			
 		}catch(Exception e){}
 		return taskDetailBeanArray;
+	}
+			
+	
+	public static boolean updateTaskStatus(String taskId, String taskStatus){
+		boolean status=true;
+		try{
+			if(con == null){
+				con=ConnectionProvider.getCon();
+			}
+			
+			PreparedStatement ps=con.prepareStatement(" update task_details " 
+					+ " set status = '" + taskStatus + "' "
+					+ " where taskDetailId = "+taskId);
+			
+			ps.executeUpdate();
+			status = true;
+		} catch (Exception e)
+	    {
+		      System.err.println("Got an exception! ");
+		      System.err.println(e.getMessage());
+		      status = false;
+		      
+		 }
+		return status;
 	}
 			
 }

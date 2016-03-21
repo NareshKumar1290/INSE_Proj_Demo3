@@ -39,7 +39,7 @@
       <c:forEach items="${taskDetailDao}" var="taskDetailDao">
         <tr>
           <td onClick="openPage('searchForWorker.jsp?taskId=<c:out value="${taskDetailDao.taskId}" />');" headers="taskName"><c:out value="${taskDetailDao.taskName}" /><td>	
-          <td headers="domainOfWork"><c:out value="${taskDetailDao.clientId}" /><td>
+          <td headers="domainOfWork"><c:out value="${taskDetailDao.domain}" /><td>
           <td headers="taskDescription"><c:out value="${taskDetailDao.taskDescription}" /><td>	
           <td headers="workerRequired"><c:out value="${taskDetailDao.numberOfWorkerRequired}" /><td>
           <td headers="budget"><c:out value="${taskDetailDao.budgetPerWorker}" /><td>	

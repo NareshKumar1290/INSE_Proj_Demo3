@@ -20,13 +20,15 @@
 
 <script language="JavaScript">
 	
-    function openPage(pageURL)
-    {
+	function openPage(pageURL)
+    {	
+    	debugger;
     	var loginId = <%=request.getParameter("loginId")%>;
     	var loginIdType = <%=request.getParameter("loginIdType")%>;
     	var taskId = <%=request.getParameter("taskId")%>;
+    	var taskStatus = document.getElementById("taskStatus").value;
    		
-    	window.location.href = pageURL+"&loginId="+loginId+"&loginIdType="+loginIdType+"&taskId="+taskId;
+    	window.location.href = pageURL+"?loginId="+loginId+"&loginIdType="+loginIdType+"&taskStatus="+taskStatus+"&taskId="+taskId;
     }
 </script>
 
@@ -48,8 +50,8 @@
     </tr>
       <c:forEach items="${taskDetailDao}" var="taskDetailDao">
         <tr>
-          <td onClick="openPage('searchForWorker.jsp?taskId=<c:out value="${taskDetailDao.taskId}" />');" headers="taskName"><c:out value="${taskDetailDao.taskName}" /><td>	
-          <td headers="domainOfWork"><c:out value="${taskDetailDao.domain}" /><td>
+          <td headers="taskName"><c:out value="${taskDetailDao.taskName}" /><td>	
+          <td headers="domainOfWork"><c:out value="${taskDetailDao.clientId}" /><td>
           <td headers="taskDescription"><c:out value="${taskDetailDao.taskDescription}" /><td>	
           <td headers="workerRequired"><c:out value="${taskDetailDao.numberOfWorkerRequired}" /><td>
           <td headers="budget"><c:out value="${taskDetailDao.budgetPerWorker}" /><td>	
@@ -70,19 +72,29 @@
       	<th headers="credibility">Credibility</th>
       	<th headers="yearsOfExperience">Years of Experience</th>
       	<th headers="chargedFee">Charged Fee</th>
-      	<th hidden="hidden" headers="workerId">Login Id</th>
+      	<th hidden="hidden" headers="loginId">Login Id</th>
     </tr>
       <c:forEach items="${arrayListMapOfTaskAndWorker}" var="arrayListMapOfTaskAndWorker">
         <tr>
-          <td onClick="openPage('assignTaskToWorker.jsp?workerId=<c:out value="${arrayListMapOfTaskAndWorker.workerId}" />');" headers="workerName"><c:out value="${arrayListMapOfTaskAndWorker.workerName}" /><td>	
+          <td headers="workerName"><c:out value="${arrayListMapOfTaskAndWorker.workerName}" /><td>	
           <td headers="domainOfWork"><c:out value="${arrayListMapOfTaskAndWorker.domainOfWork}" /><td>
           <td headers="specificTask"><c:out value="${arrayListMapOfTaskAndWorker.specificTask}" /><td>	
           <td headers="credibility"><c:out value="${arrayListMapOfTaskAndWorker.credibility}" /><td>
           <td headers="yearsOfExperience"><c:out value="${arrayListMapOfTaskAndWorker.yearsOfExperience}" /><td>	
           <td headers="chargedFee"><c:out value="${arrayListMapOfTaskAndWorker.chargedFee}" /><td>
-          <td headers="workerId" hidden="hidden"><c:out value="${arrayListMapOfTaskAndWorker.workerId}" /><td>
+          <td headers="loginId" hidden="hidden"><c:out value="${arrayListMapOfTaskAndWorker.loginId}" /><td>
         </tr>
       </c:forEach>
     </table>
+    
+    <br/>
+    <br/>
+    
+    Task Status : <input type="text" id="taskStatus" name="taskStatus" /><br/><br/>
+    
+    <br/>
+    <br/>
+    
+    <input type="submit" value="Change Status" onclick="openPage('clientPage.jsp')"/>
   </body>
 </html>
