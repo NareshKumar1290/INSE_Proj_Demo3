@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class TaskDetailDao {
 	static Connection con = null;
@@ -144,5 +145,110 @@ public class TaskDetailDao {
 		 }
 		return status;
 	}
+	
+	public static boolean insertIntoWorkerTaskDetails(String taskId, String taskStatus, String workerId){
+		boolean status = false;
+		try{
+			if(con == null){
+				con=ConnectionProvider.getCon();
+			}
 			
+			PreparedStatement ps=con.prepareStatement("insert into task_details_per_worker"
+					+ "(Worker_Login_Details_Id, Task_Details_Id, CompletionPercentage, Client_Feedback, Client_Credibility) "
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?);");
+			
+			
+			ps.setString(1, workerId);
+			ps.setString(2, taskId);
+			ps.setString(3, "'0%'");
+			ps.setString(4, "''");
+			ps.setString(5, "''");
+
+			int one = ps.executeUpdate();
+			status = one == 1 ? true : false;
+			con.commit();
+			
+		} catch (Exception e){
+		      System.err.println("Got an exception! ");
+		      System.err.println(e.getMessage());
+		      status = false;
+		 }
+		return status;
+	}
+	
+	// Task Percentage would be changed by worker when he is starting to change the task
+	public static boolean updatePercentageOfTaskByWorker(String taskId, String taskPercentage){
+		boolean status = false;
+		
+		try{
+			if(con==null){
+				con=ConnectionProvider.getCon();
+			}
+			
+			PreparedStatement ps=con.prepareStatement("update task_details_per_worker"
+					+ " set CompletionPercentage = " + taskPercentage
+					+ " where Task_Details_Id = " + taskId);
+			
+			int one = ps.executeUpdate();
+			status = one == 1 ? true : false;
+			con.commit();
+			
+		} catch (Exception e){
+		      System.err.println("Got an exception! ");
+		      System.err.println(e.getMessage());
+		      status = false;
+		 }
+		return status;
+	}
+	
+	// Task Status would be updated by Worker after being assigned
+	public static boolean updateStatusOfTaskByWorker(String taskId, String taskStatus){
+		boolean status = false;
+		
+		try{
+			if(con==null){
+				con=ConnectionProvider.getCon();
+			}
+			
+			PreparedStatement ps=con.prepareStatement("update task_details"
+					+ " set status = '" + taskStatus + "' "
+					+ " where taskDetailId = " + taskId);
+			
+			int one = ps.executeUpdate();
+			status = one == 1 ? true : false;
+			con.commit();
+			
+		} catch (Exception e){
+		      System.err.println("Got an exception! ");
+		      System.err.println(e.getMessage());
+		      status = false;
+		 }
+		return status;
+	}
+	
+	// Client Feedback and Client Rating to be saved and updated
+		public static boolean updateClientStatusAndFeedbackOfTaskByClient(String taskId, String clientRating, String clientFeedback){
+			boolean status = false;
+			
+			try{
+				if(con==null){
+					con=ConnectionProvider.getCon();
+				}
+				
+				PreparedStatement ps=con.prepareStatement("update task_details_per_worker"
+						+ " set Client_Credibility = '" + clientFeedback + "' "
+						+ " and Client_Feedback = '" + clientRating + "' "
+						+ " where Task_Details_Id = " + taskId);
+				
+				int one = ps.executeUpdate();
+				status = one == 1 ? true : false;
+				con.commit();
+				
+			} catch (Exception e){
+			      System.err.println("Got an exception! ");
+			      System.err.println(e.getMessage());
+			      status = false;
+			 }
+			return status;
+		}
 }

@@ -15,6 +15,10 @@
 			boolean taskStatus = TaskDetailDao.updateTaskStatus(request.getParameter("taskId"), request.getParameter("taskStatus"));
 			if(taskStatus)
 				pageContext.setAttribute("taskStatus", taskStatus);
+			
+			boolean workerTaskSaveDetails = TaskDetailDao.insertIntoWorkerTaskDetails(request.getParameter("taskId"), request.getParameter("taskStatus"), request.getParameter("workerId"));
+			if(workerTaskSaveDetails)
+				pageContext.setAttribute("workerTaskSaveDetails", workerTaskSaveDetails);
 		}
 	
 	%>

@@ -2,6 +2,7 @@
 	<h1>Welcome to Worker Page !!!!!</h1>
 	
 	<Input type="button" name = "Add Skills" value="Add Skills" onClick="openPage('WorkerSkillExperience.jsp');">
+	<Input type="button" name = "View Tasks" value="View Tasks" onClick="openPage('ViewWorkersTaskList.jsp');">
 	
 </form>
 
