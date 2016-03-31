@@ -26,9 +26,10 @@
     	var loginId = <%=request.getParameter("loginId")%>;
     	var loginIdType = <%=request.getParameter("loginIdType")%>;
     	var taskId = <%=request.getParameter("taskId")%>;
+    	var workerId = <%=request.getParameter("workerId")%>;
     	var taskStatus = document.getElementById("taskStatus").value;
    		
-    	window.location.href = pageURL+"?loginId="+loginId+"&loginIdType="+loginIdType+"&taskStatus="+taskStatus+"&taskId="+taskId;
+    	window.location.href = pageURL+"?loginId="+loginId+"&loginIdType="+loginIdType+"&taskStatus="+taskStatus+"&workerId="+workerId+"&taskId="+taskId;
     }
 </script>
 

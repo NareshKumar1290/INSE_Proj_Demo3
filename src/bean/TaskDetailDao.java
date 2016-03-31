@@ -146,6 +146,53 @@ public class TaskDetailDao {
 		return status;
 	}
 	
+	public static ArrayList<HashMap<String, String>> assignedTaskToWorker(String workerId){
+		return assignedTaskToWorker(workerId, null);
+	}
+	
+	public static ArrayList<HashMap<String, String>> assignedTaskToWorker(String workerId, String taskId){
+		
+		ArrayList<HashMap<String, String>> listOfTaskAssignedToWorker = new ArrayList<HashMap<String, String>>();
+		HashMap<String, String> mapOfTaskAssignedToWorker = new HashMap<String, String>();
+
+		try{
+			if(con == null){
+				con=ConnectionProvider.getCon();
+			}
+			
+			String queryToExecute = "select * from task_details taskDetails "
+					+ " JOIN task_details_per_worker taskDetailsPerWorker "
+					+ " where taskDetails.taskDetailId = taskDetailsPerWorker.Task_Details_Id "
+					+ " and taskDetailsPerWorker.Worker_id = " + workerId;
+			
+			if(taskId != null && taskId.length() > 0){
+				queryToExecute += " and taskDetails.taskDetailId = " + taskId;
+			}
+			
+			PreparedStatement ps=con.prepareStatement(queryToExecute);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				mapOfTaskAssignedToWorker.put("taskDetailId",rs.getString("taskDetailId"));
+				mapOfTaskAssignedToWorker.put("taskName",rs.getString("taskName"));
+				mapOfTaskAssignedToWorker.put("domainOfWork",rs.getString("domainOfWork"));
+				mapOfTaskAssignedToWorker.put("specificTask",rs.getString("specificTask"));
+				mapOfTaskAssignedToWorker.put("Budget",rs.getString("BudgetPerWorker"));
+				mapOfTaskAssignedToWorker.put("status",rs.getString("status"));
+				mapOfTaskAssignedToWorker.put("completionPercentage",rs.getInt("CompletionPercentage")+"");
+				
+				listOfTaskAssignedToWorker.add(mapOfTaskAssignedToWorker);
+			}
+			
+		} catch (Exception e)
+	    {
+		      System.err.println("Got an exception! ");
+		      System.err.println(e.getMessage());
+		      
+		 }
+		return listOfTaskAssignedToWorker;
+	}
+	
 	public static boolean insertIntoWorkerTaskDetails(String taskId, String taskStatus, String workerId){
 		boolean status = false;
 		try{
@@ -154,15 +201,16 @@ public class TaskDetailDao {
 			}
 			
 			PreparedStatement ps=con.prepareStatement("insert into task_details_per_worker"
-					+ "(Worker_Login_Details_Id, Task_Details_Id, CompletionPercentage, Client_Feedback, Client_Credibility) "
-					+ "values (?, ?, ?, ?, ?, ?, ?, ?);");
+					+ "(Worker_Id, Worker_Login_Details_Id, Task_Details_Id, CompletionPercentage, Client_Feedback, Client_Credibility) "
+					+ "values (?, ?, ?, ?, ?, ?);");
 			
 			
 			ps.setString(1, workerId);
-			ps.setString(2, taskId);
-			ps.setString(3, "'0%'");
-			ps.setString(4, "''");
-			ps.setString(5, "''");
+			ps.setString(2, workerId);
+			ps.setString(3, taskId);
+			ps.setInt(4, 0);
+			ps.setString(5, " ");
+			ps.setString(6, " ");
 
 			int one = ps.executeUpdate();
 			status = one == 1 ? true : false;
