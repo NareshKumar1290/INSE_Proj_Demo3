@@ -21,6 +21,15 @@
 				pageContext.setAttribute("workerTaskSaveDetails", workerTaskSaveDetails);
 		}
 	
+		if(request.getParameter("taskRating") != null && request.getParameter("taskRating").length() > 0
+				&& request.getParameter("taskFeedBack") != null && request.getParameter("taskFeedBack").length() > 0
+					&& request.getParameter("transactionAmount") != null && request.getParameter("transactionAmount").length() > 0){
+			
+			boolean saveTaskRatingAndFeedBack = TaskDetailDao.updateClientStatusAndFeedbackOfTaskByClient(request.getParameter("taskId"), request.getParameter("taskRating"), request.getParameter("taskFeedBack"));
+			
+			boolean transactionOfAmount = TaskDetailDao.transactionByClient(request.getParameter("taskId"), request.getParameter("transactionAmount"));
+		}
+	
 	%>
 
 	function openPage(pageURL)
@@ -41,4 +50,5 @@
 	
 	<Input type="button" name = "Add Tasks" value="Add Tasks" onClick="openPage('TaskDetail.jsp');">
 	<Input type="button" name = "View Tasks" value="View Tasks" onClick="openPage('viewTaskDetail.jsp');">
+	<Input type="button" name = "Client Rating & FeedBack" value="Client Rating & FeedBack" onClick="openPage('feedBackAndTransaction.jsp');">
 </form>

@@ -44,10 +44,14 @@ public class TaskDetailDao {
 	}
 	
 	public static ArrayList<TaskDetailBean> fetchClientTaskRecords(String loginId){
-		return fetchClientTaskRecords(loginId, null);
+		return fetchClientTaskRecords(loginId, null, null);
 	}
 	
-	public static ArrayList<TaskDetailBean> fetchClientTaskRecords(String loginId, String taskIdStr){
+	public static ArrayList<TaskDetailBean> fetchClientTaskRecords(String loginId, String taskStatus){
+		return fetchClientTaskRecords(loginId, null, taskStatus);
+	}
+	
+	public static ArrayList<TaskDetailBean> fetchClientTaskRecords(String loginId, String taskIdStr, String taskStatusStr){
 		
 		ArrayList<TaskDetailBean> taskDetailBeanArray = new ArrayList<TaskDetailBean>();
 		String taskName="", domain="", taskDescription="", taskStatusString="" ;
@@ -284,16 +288,66 @@ public class TaskDetailDao {
 				}
 				
 				PreparedStatement ps=con.prepareStatement("update task_details_per_worker"
-						+ " set Client_Credibility = '" + clientFeedback + "' "
-						+ " and Client_Feedback = '" + clientRating + "' "
+						+ " set Client_Credibility = '" + clientRating + "' "
+						+ " , Client_Feedback = '" + clientFeedback + "' "
 						+ " where Task_Details_Id = " + taskId);
 				
 				int one = ps.executeUpdate();
 				status = one == 1 ? true : false;
-				con.commit();
 				
 			} catch (Exception e){
 			      System.err.println("Got an exception! ");
+			      System.err.println(e.getMessage());
+			      status = false;
+			 }
+			return status;
+		}
+		
+		public static boolean transactionByClient(String taskId, String transactionAmount){
+			boolean status=false;
+			try{
+				if(con == null){
+					con=ConnectionProvider.getCon();
+				}
+				String workerId = "0", clientId = "0";
+				
+				String queryToExecuteClientId = " select clientId from task_details "
+						+ " where taskDetailId = " +taskId;
+				
+				PreparedStatement psSelectClientId=con.prepareStatement(queryToExecuteClientId);
+				ResultSet rsSelectClientId = psSelectClientId.executeQuery();
+				while(rsSelectClientId.next()){
+					clientId = rsSelectClientId.getString("clientId");
+				}
+				
+				String queryToExecuteWorkerId = " select Worker_Id from task_details_per_worker "
+						+ " where Task_Details_Id = " +taskId;
+				
+				PreparedStatement psSelectWorkerId=con.prepareStatement(queryToExecuteWorkerId);
+				ResultSet rsSelectWorkerId = psSelectWorkerId.executeQuery();
+				while(rsSelectWorkerId.next()){
+					workerId = rsSelectWorkerId.getString("Worker_Id");
+				}
+				
+				PreparedStatement psInsert=con.prepareStatement(" insert into transaction"
+						+ " (Client_Id, Worker_Id, Amount, DateTimeTrans, Task_Detail_Id) "
+						+ " values (?, ?, ?, ?, ?); ");
+				
+				psInsert.setInt(1, Integer.parseInt(clientId));
+				psInsert.setInt(2, Integer.parseInt(workerId));
+				psInsert.setInt(3, Integer.parseInt(transactionAmount));
+				
+				Calendar cal = Calendar.getInstance();
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				
+				psInsert.setString(4, dateFormat.format(cal.getTime()));
+				psInsert.setInt(5, Integer.parseInt(taskId));
+				
+				int one = psInsert.executeUpdate();
+				status = one == 1 ? true : false;
+				
+			} catch (Exception e){
+			      System.err.println("got an exception! ");
 			      System.err.println(e.getMessage());
 			      status = false;
 			 }
