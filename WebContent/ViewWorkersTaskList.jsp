@@ -44,7 +44,7 @@
       	<th headers="status">Status</th>
       	<th headers="completionPercentage">Completion Percentage</th>
     </tr>
-      <c:forEach items="${taskDetailDao}" var="taskDetailDao">
+      <c:forEach items="${assignedTaskToWorker}" var="assignedTaskToWorker">
         <tr>
           <td onClick="openPage('updateTaskStatusAndCompletionPercentage.jsp?taskDetailId=<c:out value="${assignedTaskToWorker.taskDetailId}" />');" headers="taskDetailId"><c:out value="${assignedTaskToWorker.taskDetailId}" /><td>	
           <td headers="taskName"><c:out value="${assignedTaskToWorker.taskName}" /><td>
