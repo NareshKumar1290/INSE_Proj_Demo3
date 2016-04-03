@@ -17,7 +17,7 @@ public class TaskDetailDao {
 				con=ConnectionProvider.getCon();
 			}
 			
-			PreparedStatement ps=con.prepareStatement("insert into task_details"
+			PreparedStatement ps=con.prepareStatement(" insert into task_details "
 					+ "(taskName, domainOfWork, specificTask, WorkersRequired, BudgetPerWorker, Date, status, clientId) "
 					+ "values (?, ?, ?, ?, ?, ?, ?, ?);");
 			
@@ -37,9 +37,12 @@ public class TaskDetailDao {
 			
 			int one = ps.executeUpdate();
 			status = one == 1 ? true : false;
-			con.commit();
 			
-		}catch(Exception e){}
+		}catch(Exception e){
+			 System.err.println("got an exception! ");
+		      System.err.println(e.getMessage());
+		      status = false;
+		}
 		return status;
 	}
 	
@@ -65,7 +68,10 @@ public class TaskDetailDao {
 			
 			String queryToExecute = "select * from task_details where clientId = " + loginIdInt;
 			if(taskIdStr != null && taskIdStr.length() > 0 && Integer.parseInt(taskIdStr) > 0){
-				queryToExecute += " where taskDetailId = "+taskIdStr; 
+				queryToExecute += " and taskDetailId = "+taskIdStr; 
+			}
+			if(taskStatusStr != null && taskStatusStr.length() > 0 && taskStatusStr.equals("Completed")){
+				queryToExecute += " and status = 'Completed' "; 
 			}
 			
 			PreparedStatement ps=con.prepareStatement(queryToExecute);
@@ -218,7 +224,6 @@ public class TaskDetailDao {
 
 			int one = ps.executeUpdate();
 			status = one == 1 ? true : false;
-			con.commit();
 			
 		} catch (Exception e){
 		      System.err.println("Got an exception! ");

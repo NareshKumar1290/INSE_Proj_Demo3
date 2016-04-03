@@ -13,6 +13,7 @@
 			&& request.getParameter("taskCompletionPercentage") != null && request.getParameter("taskCompletionPercentage").length() > 0){
 		TaskDetailDao.updatePercentageOfTaskByWorker(request.getParameter("taskDetailId"), request.getParameter("taskCompletionPercentage"));
 		TaskDetailDao.updateStatusOfTaskByWorker(request.getParameter("taskDetailId"), request.getParameter("taskStatus"));
+		out.println("Information has been updated in the database !!!!");
 		
 	}
 %>

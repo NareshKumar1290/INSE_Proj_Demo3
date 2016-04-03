@@ -14,7 +14,11 @@ public class WorkerSkillExperienceDao {
 					&& saveSkillSet5(bean)){
 				status = true;
 			}
-		}catch(Exception e){}
+		}catch(Exception e){
+			System.err.println("got an exception! ");
+		    System.err.println(e.getMessage());
+		    status = false;
+		}
 		return status;
 	}
 	
