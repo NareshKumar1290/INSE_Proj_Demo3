@@ -42,9 +42,12 @@ public class RegisterDao {
 			
 			int one = ps.executeUpdate();
 			status = one == 1 ? true : false;
-			con.commit();
 			
-		}catch(Exception e){}
+		}catch(Exception e){
+			 System.err.println("got an exception! ");
+		     System.err.println(e.getMessage());
+		     status = false;
+		}
 		return status;
 	}
 }
