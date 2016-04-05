@@ -14,7 +14,7 @@
 	ArrayList<HashMap<String, String>> arrayListMapOfTaskAndWorker2 = SearchForWorker.getWorkerDetailList(request.getParameter("taskId"));
 	pageContext.setAttribute("arrayListMapOfTaskAndWorker", arrayListMapOfTaskAndWorker2);
 	
-	ArrayList<TaskDetailBean> taskDetailDaoObj = TaskDetailDao.fetchClientTaskRecords(request.getParameter("loginId"));
+	ArrayList<TaskDetailBean> taskDetailDaoObj = TaskDetailDao.fetchClientTaskRecords(request.getParameter("loginId"), request.getParameter("taskId"), null);
 	pageContext.setAttribute("taskDetailDao", taskDetailDaoObj);
 %>
 
@@ -84,5 +84,9 @@
         </tr>
       </c:forEach>
     </table>
+    
+    <br /><br />
+    <Input type="button" name = "Client Page" value="Back" onClick="openPage('clientPage.jsp?1=1');">
+	<Input type="button" name = "Logout" value="Logout" onClick="openPage('index.jsp?1=1');">
   </body>
 </html>

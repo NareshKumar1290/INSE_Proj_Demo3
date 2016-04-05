@@ -97,5 +97,7 @@
     <br/>
     
     <input type="submit" value="Change Status" onclick="openPage('clientPage.jsp')"/>
+    <Input type="button" name = "Client Page" value="Back" onClick="openPage('clientPage.jsp?1=1');">
+	<Input type="button" name = "Logout" value="Logout" onClick="openPage('index.jsp?1=1');">
   </body>
 </html>

@@ -58,5 +58,9 @@
         </tr>
       </c:forEach>
     </table>
+    
+     <br /><br />
+    <Input type="button" name = "Worker Page" value="Back" onClick="openPage('workerPage.jsp?1=1');">
+	<Input type="button" name = "Logout" value="Logout" onClick="openPage('index.jsp?1=1');">
   </body>
 </html>

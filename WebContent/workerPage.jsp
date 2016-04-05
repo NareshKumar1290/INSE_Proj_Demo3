@@ -3,7 +3,7 @@
 	
 	<Input type="button" name = "Add Skills" value="Add Skills" onClick="openPage('WorkerSkillExperience.jsp');">
 	<Input type="button" name = "View Tasks" value="View Tasks" onClick="openPage('ViewWorkersTaskList.jsp');">
-	
+	<Input type="button" name = "Logout" value="Logout" onClick="openPage('index.jsp');">
 </form>
 
 

@@ -1,3 +1,15 @@
+
+<script language="JavaScript">
+	
+    function openPage(pageURL)
+    {
+    	var loginId = <%=request.getParameter("loginId")%>;
+    	var loginIdType = <%=request.getParameter("loginIdType")%>;
+   		
+    	window.location.href = pageURL+"&loginId="+loginId+"&loginIdType="+loginIdType;
+    }
+</script>
+
 <form action="WorkerSkillExperienceSave.jsp">
 	<h1>Welcome to Worker Page !!!!!</h1>
 	
@@ -59,5 +71,8 @@ Available <select id=available name="available">
 <br/><br/><br/><br/>
 
 <Input type="submit" name ="Save" value="Save">
+<br/><br/>
+<Input type="button" name = "Worker Page" value="Back" onClick="openPage('workerPage.jsp?1=1');">
+<Input type="button" name = "Logout" value="Logout" onClick="openPage('index.jsp?1=1');">
 
 </form>

@@ -34,7 +34,7 @@
 
 	function openPage(pageURL)
     {
-    	var loginId = <%=request.getParameter("loginId")%>;
+    	var loginId = <%=request.getParameter("loginId") != null && request.getParameter("loginId").length() > 0 ? request.getParameter("loginId") : request.getParameter("clientId")%>;
     	var loginIdType = <%=request.getParameter("loginIdType")%>;
    		
     	window.location.href = pageURL+"?loginId="+loginId+"&loginIdType="+loginIdType;
@@ -51,4 +51,5 @@
 	<Input type="button" name = "Add Tasks" value="Add Tasks" onClick="openPage('TaskDetail.jsp');">
 	<Input type="button" name = "View Tasks" value="View Tasks" onClick="openPage('viewTaskDetail.jsp');">
 	<Input type="button" name = "Client Rating & FeedBack" value="Client Rating & FeedBack" onClick="openPage('feedBackAndTransaction.jsp');">
+	<Input type="button" name = "Logout" value="Logout" onClick="openPage('index.jsp');">
 </form>
